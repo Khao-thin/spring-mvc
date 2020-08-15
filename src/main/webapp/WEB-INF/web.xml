@@ -25,7 +25,7 @@
 	<!-- *用于匹配所有的请求路径 -->
     <servlet-mapping>
         <servlet-name>app</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
   
 </web-app>
