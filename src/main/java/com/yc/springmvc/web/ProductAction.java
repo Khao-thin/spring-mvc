@@ -11,9 +11,10 @@ import com.yc.springmvc.bean.DmUser;
 
 @RestController
 public class ProductAction {
-	@RequestMapping(path="product.do",params="op=query")
+	
+	@RequestMapping(path="product.do",params="op=query",produces="text/html;charset=UTF-8")
 	public String query() {
-		return "query";
+		return "按时间大苏打";
 	}
 	@RequestMapping(path="product.do",params="op=add")
 	public String add() {
@@ -60,13 +61,10 @@ public class ProductAction {
 	@GetMapping("findUser.do")
 	public DmUser findUser() {
 		DmUser user=new DmUser();
-		user.setCname("dsad");
+		user.setCname("玩到晚上都");
 		user.setId(100);
 		user.setPassword("123");
 		return user;
 	}
-	
-	
-	
 	
 }

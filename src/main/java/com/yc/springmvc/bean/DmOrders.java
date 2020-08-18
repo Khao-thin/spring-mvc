@@ -1,12 +1,22 @@
 package com.yc.springmvc.bean;
 
 import java.sql.Timestamp;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class DmOrders {
     private Integer id;
 
     private Double total;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    //json转换的格式注解
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date date;
+    
     private Timestamp createtime;
 
     private Integer state;
@@ -15,7 +25,17 @@ public class DmOrders {
 
     private Integer aid;
 
-    public Integer getId() {
+    public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+		//将date值同步到createtime
+		this.createtime=new Timestamp(date.getTime());
+	}
+
+	public Integer getId() {
         return id;
     }
 
