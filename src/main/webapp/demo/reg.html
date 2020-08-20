@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="../js/vue.min.js"></script>
+<script type="text/javascript" src="../js/axios.min.js"></script>
+
+<style type="text/css">
+	span{
+		color:red;
+	}
+</style>
+</head>
+<body>
+	<form id="reg" action="reg.do">
+		<table>
+			<tr>
+				<td>账号：<input type="text" name="ename" v-model="user.ename"><span id=ename /></td>
+			</tr>
+			<tr>
+				<td>昵称：<input type="text" name="cname" v-model="user.cname"><span id=cname /></td>
+			</tr>
+			<tr>
+				<td>密码：<input type="text" name="password" v-model="user.password"><span id=password /></td>
+			</tr>
+			<tr>
+				<td>邮箱：<input type="text" name="email" v-model="user.email"><span id=email /></td>
+			</tr>
+			<tr>
+				<td>电话：<input type="text" name="phone" v-model="user.phone"><span id=phone /></td>
+			</tr>
+			<tr>
+				<td>性别：<input type="text" name="sex" v-model="user.sex"><span id=sex /></td>
+			</tr>
+			<tr>
+				<td> <button @click="reg" type="button">注册</button></td>
+			</tr>
+		</table>
+	</form>
+	
+	<script type="text/javascript">
+		var vue=new Vue({
+			el:"#reg",
+			data:{
+				user:{}
+			},
+			methods:{
+				reg(){
+					axios.get("reg.do",{
+						params:this.user
+					}).then(res=>{
+						console.log(res.data);
+						if(res.data.code==0){
+							for( var e of res.data.data){
+								//获取报错字段对应的span对象
+								var span=document.getElementById(e.field);
+								//设置span对象的内部文本
+								span.innerText="*"+e.defaultMessage;
+							}
+						}
+					});
+				}
+			}
+		});
+	
+	</script>
+</body>
+</html>
